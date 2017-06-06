@@ -26,9 +26,9 @@ const app = new Vue({
     el: '#app',
 
     data() {
-        if (data)
-            return data;
+        if (typeof data === 'undefined')
+            return {};
 
-        return {};
+        return data;
     },
 });
