@@ -23,5 +23,12 @@ Vue.component('VaLayout', require('./components/Layout.vue'));
 Vue.component('VaBtn', require('./components/LinkButton.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    data() {
+        if (data)
+            return data;
+
+        return {};
+    },
 });

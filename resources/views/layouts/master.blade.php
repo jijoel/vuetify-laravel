@@ -22,6 +22,7 @@
     </div>
 
     <!-- Scripts -->
+    @yield('data')
     <script src="{{ mix('js/app.js') }}"></script>
     @yield('js')
 </body>

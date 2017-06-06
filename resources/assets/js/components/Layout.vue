@@ -6,7 +6,9 @@
         <v-list-item>
           <v-list-tile avatar tag="div">
             <v-list-tile-avatar>
-              <img :src="icon" />
+              <a href="/">
+                <img :src="icon" />
+              </a>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{ name }}</v-list-tile-title>
