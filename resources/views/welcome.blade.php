@@ -33,8 +33,8 @@
     <v-card
       v-for="(item,i) in carousel"
       height="300px"
-      style="width:400px"
-      class="ma-1"
+      style="width:380px"
+      class="ma-2"
     >
       <v-card-row class="primary" height="60px">
         <v-card-title class="white--text">
@@ -56,6 +56,37 @@
 
   </v-layout>
 </v-container>
+
+
+<v-footer style="height:auto">
+<v-container fluid>
+    <v-layout>
+  <ul>
+    <li>1. Test</li>
+    <li>2. Test</li>
+    <li>3. Test</li>
+    <li>4. Test</li>
+    <li>5. Test</li>
+    <li>6. Test</li>
+    <li>7. Test</li>
+    <li>8. Test</li>
+    <li>9. Test</li>
+  </ul>
+
+  <ul class="ml-4 pl-3">
+    <li>1. Test</li>
+    <li>2. Test</li>
+    <li>3. Test</li>
+  </ul>
+
+  <v-spacer></v-spacer>
+  <div style="align-self:flex-end">
+    © @{{ new Date().getFullYear() }} and some such
+  </div>
+  </v-layout>
+</v-container>
+</v-footer>
+
 
 @endSection
 
