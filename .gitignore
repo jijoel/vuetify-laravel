@@ -1,11 +1,23 @@
+# Ignore vendor files
+/vendor
 /node_modules
+
+# Compiled assets
+/public/css/*
+/public/js/*
+/public/build/*
 /public/hot
 /public/storage
-/storage/*.key
-/vendor
-/.idea
-/.vagrant
+
+# Development files
 Homestead.json
 Homestead.yaml
 npm-debug.log
+/.idea
+/.vagrant
 .env
+.DS_Store
+
+# Other
+/storage/*.key
+
