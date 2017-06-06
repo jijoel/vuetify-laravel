@@ -1,12 +1,12 @@
 <template>
-  <v-app>
+  <v-app v-cloak>
     <v-navigation-drawer persistent dark :mini-variant.sync="mini" v-model="drawer">
 
       <v-list class="pa-0">
         <v-list-item>
           <v-list-tile avatar tag="div">
             <v-list-tile-avatar>
-              <img src="https://randomuser.me/api/portraits/men/85.jpg" />
+              <img :src="icon" />
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title>{{ name }}</v-list-tile-title>
@@ -23,9 +23,9 @@
       <v-list class="pt-0" dense>
         <v-divider></v-divider>
         <v-list-item v-for="item in items" :key="item">
-          <v-list-tile :href="item.uri" ripple>
+          <v-list-tile active :href="item.uri" ripple>
             <v-list-tile-action>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon light>{{ item.icon }}</v-icon>
             </v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title>{{ item.title }}</v-list-tile-title>
@@ -52,12 +52,13 @@
 <script>
   export default {
     props: {
+      icon: {
+        accept: String,
+        default: '/img/v.png',
+      },
       name: {
         accept: String,
-        required: true,
-      },
-      user: {
-        // type: Object,
+        default: 'Vuetify Laravel',
       },
     },
     data () {
