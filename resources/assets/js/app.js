@@ -20,6 +20,7 @@ require('vuetify');
 Vue.component('example', require('./components/Example.vue'));
 
 Vue.component('VaLayout', require('./components/Layout.vue'));
+Vue.component('VaBtn', require('./components/LinkButton.vue'));
 
 const app = new Vue({
     el: '#app'
