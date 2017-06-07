@@ -4,7 +4,7 @@
 
 <v-container fluid class="mt-5">
   <v-layout row justify-center>
-    <v-flex md6>
+    <v-flex xs12 sm8 md6 lg4>
 
       <form action="{{ route('register') }}" method="post" role="form">
         <v-card>
@@ -68,7 +68,7 @@
           </v-card-row>
 
         </v-card>
-        </form>
+      </form>
 
     </v-flex>
   </v-layout>

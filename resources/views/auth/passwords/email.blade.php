@@ -2,9 +2,9 @@
 
 @section('content')
 
-<v-container fluid>
+<v-container fluid class="mt-5">
   <v-layout row justify-center>
-    <v-flex md6>
+    <v-flex xs12 sm8 md6 lg4>
 
       <form action="{{ route('password.email') }}" method="post" role="form">
         <v-card>
