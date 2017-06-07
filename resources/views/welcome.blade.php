@@ -1,19 +1,6 @@
-@extends('layouts.master')
+@extends('layouts.simple')
 
-@section('body')
-
-<v-toolbar fixed class="indigo darken-4" light>
-  <v-toolbar-title>
-    {{ config('app.name', 'Laravel') }}
-  </v-toolbar-title>
-  <v-spacer></v-spacer>
-  <va-btn primary light href="{{ route('login') }}">
-    Login
-  </va-btn>
-  <va-btn primary light href="{{ route('register') }}">
-    Register
-  </va-btn>
-</v-toolbar>
+@section('content')
 
 <v-carousel>
   <v-carousel-item
@@ -35,6 +22,7 @@
       height="300px"
       style="width:380px"
       class="ma-2"
+      hover
     >
       <v-card-row class="primary" height="60px">
         <v-card-title class="white--text">
