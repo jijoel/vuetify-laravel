@@ -1,68 +1,73 @@
-@extends('layouts.app')
+@extends('layouts.simple')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
+<v-container fluid class="mt-5">
+  <v-layout row>
+    <v-flex md6 offset-md3>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+      <form action="{{ route('login') }}" method="post" role="form">
+        <v-card>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+          <v-card-row class="primary">
+            <v-card-title class="white--text">
+              Login
+            </v-card-title>
+          </v-card-row>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+          <v-card-row>
+            <v-container fluid>
+              {{ csrf_field() }}
+              <v-text-field
+                name="email"
+                v-model="email"
+                label="Email Address"
+                required
+              ></v-text-field>
+              <v-text-field
+                name="password"
+                label="Password"
+                v-model="password"
+                :append-icon="hidden ? 'visibility' : 'visibility_off'"
+                :append-icon-cb="() => (hidden = !hidden)"
+                :type="hidden ? 'password' : 'text'"
+                required
+              ></v-text-field>
+              <v-checkbox
+                name="remember"
+                label="Remember Me"
+                v-model="remember"
+                primary
+              ></v-checkbox>
+            </v-container>
+          </v-card-row>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+          <v-card-row actions>
+            <v-btn type="submit" primary light class="mx-3">
+              Login
+            </v-btn>
+            <va-btn href="{{ route('password.request') }}">
+              Forgot Your Password?
+            </v-btn>
+          </v-card-row>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+        </v-card>
+      </form>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+    </v-flex>
+  </v-layout>
+</v-container>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
+
+
+@section('data')
+<script>
+  var data = {
+    email: '',
+    password: '',
+    hidden: true,
+    remember: false,
+    favorite: false,
+  }
+</script>
+@endSection

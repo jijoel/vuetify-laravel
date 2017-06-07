@@ -42,9 +42,12 @@
       <v-toolbar-side-icon light @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
       <v-toolbar-title>{{ name }}</v-toolbar-title>
     </v-toolbar>
+
     <main>
       <v-container fluid>
+
         <slot></slot>
+
       </v-container>
     </main>
   </v-app>
