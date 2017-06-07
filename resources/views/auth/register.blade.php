@@ -1,76 +1,92 @@
-@extends('layouts.app')
+@extends('layouts.simple')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
-                        {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+<v-container fluid class="mt-5">
+  <v-layout row justify-center>
+    <v-flex md6>
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+      <form action="{{ route('register') }}" method="post" role="form">
+        <v-card>
 
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+          <v-card-row class="primary">
+            <v-card-title class="white--text">
+              Register
+            </v-card-title>
+          </v-card-row>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+          <v-card-row>
+            <v-container fluid>
+              {{ csrf_field() }}
+              <v-text-field
+                name="name"
+                v-model="name"
+                label="Name"
+                required
+                autofocus
+              ></v-text-field>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+              <v-text-field
+                name="email"
+                v-model="email"
+                label="Email Address"
+                :rules="[() => errors['email'] ? errors['email'].join() : '']"
+                required
+              ></v-text-field>
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+              <v-text-field
+                name="password"
+                label="Password"
+                hint="Please enter at least 6 characters"
+                v-model="password"
+                :append-icon="hidden ? 'visibility' : 'visibility_off'"
+                :append-icon-cb="() => (hidden = !hidden)"
+                :type="hidden ? 'password' : 'text'"
+                required
+                counter
+                min="6"
+                max="60"
+              ></v-text-field>
 
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
+              <v-text-field
+                name="password_confirmation"
+                label="Password Confirmation"
+                v-model="password2"
+                :append-icon="hidden2 ? 'visibility' : 'visibility_off'"
+                :append-icon-cb="() => (hidden2 = !hidden2)"
+                :type="hidden2 ? 'password' : 'text'"
+                required
+              ></v-text-field>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
+            </v-container>
+          </v-card-row>
 
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
+          <v-card-row actions>
+            <v-btn type="submit" primary light class="mx-3 mb-2">
+              Register
+            </v-btn>
+          </v-card-row>
 
-                        <div class="form-group">
-                            <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
+        </v-card>
+        </form>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
+    </v-flex>
+  </v-layout>
+</v-container>
 
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Register
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
+
+
+@section('data')
+<script>
+  var data = {
+    name: "{{ old('name') }}",
+    email: "{{ old('email') }}",
+    password: '',
+    password2: '',
+    hidden: true,
+    hidden2: true,
+  };
+  var errors = '{!! $errors->toJson() !!}';
+</script>
+@endSection

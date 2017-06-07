@@ -31,4 +31,13 @@ const app = new Vue({
 
         return data;
     },
+
+    computed: {
+        errors() {
+            if (typeof errors === 'undefined')
+                return {};
+
+            return JSON.parse(errors);
+        }
+    }
 });
