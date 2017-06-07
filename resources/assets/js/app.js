@@ -9,6 +9,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+require('vuetify');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -17,6 +19,25 @@ window.Vue = require('vue');
 
 Vue.component('example', require('./components/Example.vue'));
 
+Vue.component('VaLayout', require('./components/Layout.vue'));
+Vue.component('VaBtn', require('./components/LinkButton.vue'));
+
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    data() {
+        if (typeof data === 'undefined')
+            return {};
+
+        return data;
+    },
+
+    computed: {
+        errors() {
+            if (typeof errors === 'undefined')
+                return {};
+
+            return JSON.parse(errors);
+        }
+    }
 });

@@ -1,95 +1,109 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.simple')
 
-        <title>Laravel</title>
+@section('content')
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+<v-carousel>
+  <v-carousel-item
+    v-for="(item,i) in carousel"
+    :src="item.picture"
+    :key="i"
+  >
+    <div style="position:absolute;bottom:0;left:0;padding-bottom:1em" class="display-2 white--text">
+      @{{ item.title }}
+    </div>
+  </v-carousel-item>
+</v-carousel>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+<v-container fluid>
+    <v-layout row wrap justify-center>
 
-            .full-height {
-                height: 100vh;
-            }
+    <v-card
+      v-for="(item,i) in carousel"
+      height="300px"
+      style="width:380px"
+      class="ma-2"
+      hover
+    >
+      <v-card-row class="primary" height="60px">
+        <v-card-title class="white--text">
+          @{{ item.title }}
+        </v-card-title>
+      </v-card-row>
+      <v-card-row :img="item.picture" height="180px">
+        <v-card-text class="white--text">
+          @{{ item.text }}
+        </v-card-text>
+      </v-card-row>
+      <v-card-row actions height="60px">
+        <v-spacer></v-spacer>
+        <v-btn primary light>Do Something</v-btn>
+        <v-spacer></v-spacer>
+      </v-card-row>
+    </v-card>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
 
-            .position-ref {
-                position: relative;
-            }
+  </v-layout>
+</v-container>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
 
-            .content {
-                text-align: center;
-            }
+<v-footer style="height:auto">
+<v-container fluid>
+    <v-layout>
+  <ul>
+    <li>1. Test</li>
+    <li>2. Test</li>
+    <li>3. Test</li>
+    <li>4. Test</li>
+    <li>5. Test</li>
+    <li>6. Test</li>
+    <li>7. Test</li>
+    <li>8. Test</li>
+    <li>9. Test</li>
+  </ul>
 
-            .title {
-                font-size: 84px;
-            }
+  <ul class="ml-4 pl-3">
+    <li>1. Test</li>
+    <li>2. Test</li>
+    <li>3. Test</li>
+  </ul>
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+  <v-spacer></v-spacer>
+  <div style="align-self:flex-end">
+    © @{{ new Date().getFullYear() }} and some such
+  </div>
+  </v-layout>
+</v-container>
+</v-footer>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+@endSection
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+
+@section('data')
+<script>
+    var data = {
+        carousel: [
+          {
+            title: 'Squirrel!!!',
+            picture: '/img/carousel/squirrel.jpg',
+            text: 'Itaque tenetur nemo nobis quidem dolores provident quaerat ut veritatis, repellat quam, fugiat perferendis soluta excepturi consectetur eos cum aliquid cumque facilis.',
+          },
+          {
+            title: 'Second',
+            picture: '/img/carousel/sky.jpg',
+            text: 'Quae fugit rem, dignissimos voluptatem praesentium impedit officiis laudantium voluptatum nobis, aliquid quos temporibus, eaque. Ducimus ipsa quo, maiores sequi similique quaerat. Accusantium quia, dolores. Adipisci eligendi, nobis nisi architecto a dolorem quod animi in est quae modi sint dolores quasi doloribus aut fugiat.',
+          },
+          {
+            title: 'Third',
+            picture: '/img/carousel/bird.jpg',
+            text: 'Soluta, eaque repellendus, possimus consectetur quia ipsum voluptate, nam voluptates nostrum repellat commodi aliquid eos harum deleniti rerum! Asperiores culpa fuga, id.',
+          },
+          {
+            title: '',
+            picture: '/img/carousel/planet.jpg',
+            text: 'Aliquam rerum, voluptatum doloribus voluptatem aspernatur voluptates?',
+          },
+        ],
+    };
+</script>
+@endSection
