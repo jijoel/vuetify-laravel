@@ -1,8 +1,18 @@
 <?php namespace Tests;
 
+use Illuminate\Foundation\Testing\WithoutMiddleware;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use App\User;
+
+
+/** @group now */
 class AuthTest extends TestCase
 {
+
+    use DatabaseMigrations;
+
     /**
      * @test
      */
@@ -21,8 +31,54 @@ class AuthTest extends TestCase
     public function it_can_show_the_login_page()
     {
         $this->get('/login')
-            ->assertStatus(200)
-            ->assertSee('Login');
+            ->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_errors_on_invalid_login_attempt()
+    {
+        $test = $this->post('/login', [
+            'email' => '',
+            'password' => '',
+        ]);
+
+        $test->assertRedirect('/')
+            ->assertSessionHasErrors('email')
+            ->assertSessionHasErrors('password');
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_errors_on_incorrect_credentials()
+    {
+        $test = $this->post('/login', [
+            'email' => 'a',
+            'password' => 'b',
+        ]);
+
+        $test->assertRedirect('/')
+            ->assertSessionHasErrors('email');
+    }
+
+    /**
+     * @test
+     */
+    public function it_redirects_to_home_on_valid_login()
+    {
+        factory(User::class)->create([
+            'email' => 'foo@bar.com',
+            'password' => \Hash::make('foo'),
+        ]);
+
+        $test = $this->post('/login', [
+            'email' => 'foo@bar.com',
+            'password' => 'foo',
+        ]);
+
+        $test->assertRedirect('/home');
     }
 
     /**
@@ -31,9 +87,25 @@ class AuthTest extends TestCase
     public function it_can_show_the_registration_page()
     {
         $this->get('/register')
-            ->assertStatus(200)
-            ->assertSee('Register');
+            ->assertStatus(200);
     }
 
+    /**
+     * @test
+     */
+    public function it_can_show_the_password_email_page()
+    {
+        $this->get('/password/reset')
+            ->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_show_the_password_reset_page()
+    {
+        $this->get('/password/reset/xxx')
+            ->assertStatus(200);
+    }
 
 }
