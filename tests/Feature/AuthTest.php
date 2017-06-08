@@ -7,7 +7,6 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 
 
-/** @group now */
 class AuthTest extends TestCase
 {
 
