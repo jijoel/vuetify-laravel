@@ -17,11 +17,14 @@
 
           <v-text-field
             name="email"
+            type="email"
             v-model="email"
             label="Email Address"
             prepend-icon="mail"
-            :rules="[() => errors['email'] ? errors['email'].join() : '']"
+            :error="errors.has('email')"
+            :rules="[() => errors.get('email')]"
             required
+            @input="errors.clear()"
           ></v-text-field>
 
         </v-container>
@@ -41,10 +44,9 @@
 
 @section('data')
 <script>
-  var data = {
+  var form = {
     email: "{{ old('email') }}",
   };
-  var errors = '{!! $errors->toJson() !!}';
 </script>
 @endSection
 
