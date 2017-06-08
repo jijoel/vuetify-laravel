@@ -13,11 +13,15 @@
 
       <v-card-row>
         <v-container fluid>
+
           {{ csrf_field() }}
+
           <v-text-field
             name="email"
             v-model="email"
             label="Email Address"
+            :error="errors['email'] ? true : false"
+            :rules="[() => errors['email'] ? errors['email'].join() : '']"
             required
           ></v-text-field>
 
@@ -27,6 +31,8 @@
             v-model="password"
             :append-icon="hidden ? 'visibility' : 'visibility_off'"
             :append-icon-cb="() => (hidden = !hidden)"
+            :error="errors['password'] ? true : false"
+            :rules="[() => errors['password'] ? errors['password'].join() : '']"
             :type="hidden ? 'password' : 'text'"
             required
           ></v-text-field>
@@ -59,11 +65,12 @@
 @section('data')
 <script>
   var data = {
-    email: '',
+    email: '{{ old("email") }}',
     password: '',
     hidden: true,
     remember: false,
     favorite: false,
-  }
+  };
+  var errors = '{!! $errors->toJson() !!}';
 </script>
 @endSection
