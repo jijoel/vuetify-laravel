@@ -83,6 +83,5 @@
     hidden: true,
     hidden2: true,
   };
-  var errors = '{!! $errors->toJson() !!}';
 </script>
 @endSection

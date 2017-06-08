@@ -44,7 +44,6 @@
   var data = {
     email: "{{ old('email') }}",
   };
-  var errors = '{!! $errors->toJson() !!}';
 </script>
 @endSection
 

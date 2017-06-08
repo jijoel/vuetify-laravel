@@ -73,6 +73,5 @@
     remember: false,
     favorite: false,
   };
-  var errors = '{!! $errors->toJson() !!}';
 </script>
 @endSection
