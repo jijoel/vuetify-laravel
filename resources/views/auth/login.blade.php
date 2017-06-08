@@ -1,61 +1,57 @@
-@extends('layouts.simple')
+@extends('layouts.dialog-only')
 
 @section('content')
-<v-container fluid class="mt-5">
-  <v-layout row>
-    <v-flex md6 offset-md3>
 
-      <form action="{{ route('login') }}" method="post" role="form">
-        <v-card>
+  <form action="{{ route('login') }}" method="post" role="form">
+    <v-card>
 
-          <v-card-row class="primary">
-            <v-card-title class="white--text">
-              Login
-            </v-card-title>
-          </v-card-row>
+      <v-card-row class="primary">
+        <v-card-title class="white--text">
+          Login
+        </v-card-title>
+      </v-card-row>
 
-          <v-card-row>
-            <v-container fluid>
-              {{ csrf_field() }}
-              <v-text-field
-                name="email"
-                v-model="email"
-                label="Email Address"
-                required
-              ></v-text-field>
-              <v-text-field
-                name="password"
-                label="Password"
-                v-model="password"
-                :append-icon="hidden ? 'visibility' : 'visibility_off'"
-                :append-icon-cb="() => (hidden = !hidden)"
-                :type="hidden ? 'password' : 'text'"
-                required
-              ></v-text-field>
-              <v-checkbox
-                name="remember"
-                label="Remember Me"
-                v-model="remember"
-                primary
-              ></v-checkbox>
-            </v-container>
-          </v-card-row>
+      <v-card-row>
+        <v-container fluid>
+          {{ csrf_field() }}
+          <v-text-field
+            name="email"
+            v-model="email"
+            label="Email Address"
+            required
+          ></v-text-field>
 
-          <v-card-row actions>
-            <v-btn type="submit" primary light class="mx-3">
-              Login
-            </v-btn>
-            <va-btn href="{{ route('password.request') }}">
-              Forgot Your Password?
-            </v-btn>
-          </v-card-row>
+          <v-text-field
+            name="password"
+            label="Password"
+            v-model="password"
+            :append-icon="hidden ? 'visibility' : 'visibility_off'"
+            :append-icon-cb="() => (hidden = !hidden)"
+            :type="hidden ? 'password' : 'text'"
+            required
+          ></v-text-field>
 
-        </v-card>
-      </form>
+          <v-checkbox
+            name="remember"
+            label="Remember Me"
+            v-model="remember"
+            primary
+          ></v-checkbox>
 
-    </v-flex>
-  </v-layout>
-</v-container>
+        </v-container>
+      </v-card-row>
+
+      <v-card-row actions wrap>
+        <v-btn type="submit" primary light class="mx-3">
+          Login
+        </v-btn>
+        <va-btn href="{{ route('password.request') }}">
+          Forgot Your Password?
+        </va-btn>
+      </v-card-row>
+
+    </v-card>
+  </form>
 
 @endsection
 
