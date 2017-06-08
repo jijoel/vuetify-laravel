@@ -19,6 +19,7 @@
             name="email"
             v-model="email"
             label="Email Address"
+            prepend-icon="mail"
             :rules="[() => errors['email'] ? errors['email'].join() : '']"
             required
           ></v-text-field>

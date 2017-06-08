@@ -18,6 +18,7 @@
             name="name"
             v-model="name"
             label="Name"
+            prepend-icon="person"
             required
             autofocus
           ></v-text-field>
@@ -26,6 +27,7 @@
             name="email"
             v-model="email"
             label="Email Address"
+            prepend-icon="email"
             :rules="[() => errors['email'] ? errors['email'].join() : '']"
             required
           ></v-text-field>
@@ -33,8 +35,9 @@
           <v-text-field
             name="password"
             label="Password"
-            hint="Please enter at least 6 characters"
             v-model="password"
+            prepend-icon="lock"
+            hint="Please enter at least 6 characters"
             :append-icon="hidden ? 'visibility' : 'visibility_off'"
             :append-icon-cb="() => (hidden = !hidden)"
             :type="hidden ? 'password' : 'text'"
@@ -48,6 +51,7 @@
             name="password_confirmation"
             label="Password Confirmation"
             v-model="password2"
+            prepend-icon="lock"
             :append-icon="hidden2 ? 'visibility' : 'visibility_off'"
             :append-icon-cb="() => (hidden2 = !hidden2)"
             :type="hidden2 ? 'password' : 'text'"

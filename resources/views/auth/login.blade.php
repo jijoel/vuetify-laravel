@@ -20,6 +20,7 @@
             name="email"
             v-model="email"
             label="Email Address"
+            prepend-icon="mail"
             :error="errors['email'] ? true : false"
             :rules="[() => errors['email'] ? errors['email'].join() : '']"
             required
@@ -29,6 +30,7 @@
             name="password"
             label="Password"
             v-model="password"
+            prepend-icon="lock"
             :append-icon="hidden ? 'visibility' : 'visibility_off'"
             :append-icon-cb="() => (hidden = !hidden)"
             :error="errors['password'] ? true : false"
