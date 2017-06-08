@@ -21,10 +21,9 @@
         @yield('body')
     </div>
 
+    @include ('layouts.footer')
+
     <!-- Scripts -->
-    <script>
-      var errors = '{!! $errors->toJson() !!}';
-    </script>
     @yield('data')
     <script src="{{ mix('js/app.js') }}"></script>
     @yield('js')
