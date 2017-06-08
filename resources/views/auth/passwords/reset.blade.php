@@ -16,40 +16,49 @@
         {{ csrf_field() }}
         <input type="hidden" name="token" value="{{ $token }}">
 
-        <v-text-field
-          name="email"
-          v-model="email"
-          prepend-icon="mail"
-          label="Email Address"
-          :rules="[() => errors['email'] ? errors['email'].join() : '']"
-          required
-        ></v-text-field>
+          <v-text-field
+            name="email"
+            type="email"
+            v-model="email"
+            label="Email Address"
+            prepend-icon="mail"
+            :error="errors.has('email')"
+            :rules="[() => errors.get('email')]"
+            required
+            @input="errors.clear()"
+          ></v-text-field>
 
-        <v-text-field
-          name="password"
-          label="Password"
-          v-model="password"
-          prepend-icon="lock"
-          hint="Please enter at least 6 characters"
-          :append-icon="hidden ? 'visibility' : 'visibility_off'"
-          :append-icon-cb="() => (hidden = !hidden)"
-          :type="hidden ? 'password' : 'text'"
-          required
-          counter
-          min="6"
-          max="60"
-        ></v-text-field>
+          <v-text-field
+            name="password"
+            label="Password"
+            v-model="password"
+            prepend-icon="lock"
+            hint="Please enter at least 6 characters"
+            :append-icon="hidden ? 'visibility' : 'visibility_off'"
+            :append-icon-cb="() => (hidden = !hidden)"
+            :type="hidden ? 'password' : 'text'"
+            :error="errors.has('password')"
+            :rules="[() => errors.get('password')]"
+            required
+            counter
+            min="6"
+            max="60"
+            @input="errors.clear('password')"
+          ></v-text-field>
 
-        <v-text-field
-          name="password_confirmation"
-          label="Password Confirmation"
-          v-model="password2"
-          prepend-icon="lock"
-          :append-icon="hidden2 ? 'visibility' : 'visibility_off'"
-          :append-icon-cb="() => (hidden2 = !hidden2)"
-          :type="hidden2 ? 'password' : 'text'"
-          required
-        ></v-text-field>
+          <v-text-field
+            name="password_confirmation"
+            label="Password Confirmation"
+            v-model="password2"
+            prepend-icon="lock"
+            :append-icon="hidden2 ? 'visibility' : 'visibility_off'"
+            :append-icon-cb="() => (hidden2 = !hidden2)"
+            :type="hidden2 ? 'password' : 'text'"
+            :error="errors.has('password_confirmation')"
+            :rules="[() => errors.get('password_confirmation')]"
+            required
+            @input="errors.clear('password_confirmation')"
+          ></v-text-field>
 
       </v-container>
     </v-card-row>
@@ -67,7 +76,7 @@
 
 @section('data')
 <script>
-  var data = {
+  var form = {
     email: "{{ old('email') }}",
     password: '',
     password2: '',

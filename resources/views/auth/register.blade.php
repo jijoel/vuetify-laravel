@@ -19,17 +19,23 @@
             v-model="name"
             label="Name"
             prepend-icon="person"
+            :error="errors.has('name')"
+            :rules="[() => errors.get('name')]"
             required
             autofocus
+            @input="errors.clear('name')"
           ></v-text-field>
 
           <v-text-field
             name="email"
+            type="email"
             v-model="email"
             label="Email Address"
-            prepend-icon="email"
-            :rules="[() => errors['email'] ? errors['email'].join() : '']"
+            prepend-icon="mail"
+            :error="errors.has('email')"
+            :rules="[() => errors.get('email')]"
             required
+            @input="errors.clear('email')"
           ></v-text-field>
 
           <v-text-field
@@ -41,10 +47,13 @@
             :append-icon="hidden ? 'visibility' : 'visibility_off'"
             :append-icon-cb="() => (hidden = !hidden)"
             :type="hidden ? 'password' : 'text'"
+            :error="errors.has('password')"
+            :rules="[() => errors.get('password')]"
             required
             counter
             min="6"
             max="60"
+            @input="errors.clear('password')"
           ></v-text-field>
 
           <v-text-field
@@ -55,7 +64,10 @@
             :append-icon="hidden2 ? 'visibility' : 'visibility_off'"
             :append-icon-cb="() => (hidden2 = !hidden2)"
             :type="hidden2 ? 'password' : 'text'"
+            :error="errors.has('password_confirmation')"
+            :rules="[() => errors.get('password_confirmation')]"
             required
+            @input="errors.clear('password_confirmation')"
           ></v-text-field>
 
         </v-container>
@@ -75,7 +87,7 @@
 
 @section('data')
 <script>
-  var data = {
+  var form = {
     name: "{{ old('name') }}",
     email: "{{ old('email') }}",
     password: '',

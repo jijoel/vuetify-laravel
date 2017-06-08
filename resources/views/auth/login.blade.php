@@ -18,12 +18,14 @@
 
           <v-text-field
             name="email"
+            type="email"
             v-model="email"
             label="Email Address"
             prepend-icon="mail"
-            :error="errors['email'] ? true : false"
-            :rules="[() => errors['email'] ? errors['email'].join() : '']"
+            :error="errors.has('email')"
+            :rules="[() => errors.get('email')]"
             required
+            @input="errors.clear()"
           ></v-text-field>
 
           <v-text-field
@@ -33,10 +35,10 @@
             prepend-icon="lock"
             :append-icon="hidden ? 'visibility' : 'visibility_off'"
             :append-icon-cb="() => (hidden = !hidden)"
-            :error="errors['password'] ? true : false"
-            :rules="[() => errors['password'] ? errors['password'].join() : '']"
             :type="hidden ? 'password' : 'text'"
+            :error="errors.has('password')"
             required
+            @input="errors.clear()"
           ></v-text-field>
 
           <v-checkbox
@@ -66,12 +68,11 @@
 
 @section('data')
 <script>
-  var data = {
+  var form = {
     email: '{{ old("email") }}',
     password: '',
-    hidden: true,
     remember: false,
-    favorite: false,
+    hidden: true,
   };
 </script>
 @endSection
