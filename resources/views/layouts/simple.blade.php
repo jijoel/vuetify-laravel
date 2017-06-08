@@ -4,7 +4,9 @@
 
   <v-toolbar fixed class="indigo darken-4" light>
     <v-toolbar-title>
-      {{ config('app.name', 'Laravel') }}
+      <a href="/">
+        {{ config('app.name', 'Laravel') }}
+      </a>
     </v-toolbar-title>
     <v-spacer></v-spacer>
     <va-btn primary light href="{{ route('login') }}">
