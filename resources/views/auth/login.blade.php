@@ -19,7 +19,7 @@
           <v-text-field
             name="email"
             type="email"
-            v-model="email"
+            v-model="form.email"
             label="Email Address"
             prepend-icon="mail"
             :error="errors.has('email')"
@@ -31,11 +31,11 @@
           <v-text-field
             name="password"
             label="Password"
-            v-model="password"
+            v-model="form.password"
             prepend-icon="lock"
-            :append-icon="hidden ? 'visibility' : 'visibility_off'"
+            :append-icon="form.hidden ? 'visibility' : 'visibility_off'"
             :append-icon-cb="() => (hidden = !hidden)"
-            :type="hidden ? 'password' : 'text'"
+            :type="form.hidden ? 'password' : 'text'"
             :error="errors.has('password')"
             required
             @input="errors.clear()"
@@ -44,7 +44,7 @@
           <v-checkbox
             name="remember"
             label="Remember Me"
-            v-model="remember"
+            v-model="form.remember"
             primary
           ></v-checkbox>
 
@@ -68,11 +68,16 @@
 
 @section('data')
 <script>
-  var form = {
-    email: '{{ old("email") }}',
-    password: '',
-    remember: false,
-    hidden: true,
+  var app_data = {
+    form: {
+      email: '{{ old("email") }}',
+      password: '',
+      remember: false,
+      hidden: true,
+    },
+    rules: {
+      email: 'required|email',
+    },
   };
 </script>
 @endSection

@@ -23,13 +23,13 @@ class AuthTest extends DuskTestCase
                 ->assertPathIs('/login')
                 ->waitForText('Password')
                 ->assertDontSee('credentials')
-                ->type('email', 'foo')
+                ->type('email', 'foo@bar')
                 ->type('password', 'bar')
                 // ->press('LOGIN') // this gets the first login
                 ->press('button[type=submit]')
                 ->assertPathIs('/login')
                 ->assertDontSee('Whoops')
-                ->assertInputValue('email','foo')
+                ->assertInputValue('email','foo@bar')
                 ->assertSee('credentials');
         });
     }
@@ -75,6 +75,26 @@ class AuthTest extends DuskTestCase
 
             $browser->visit('/logout')
                 ->assertPathIs('/');
+        });
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_handle_quotation_marks_when_registering_a_user()
+    {
+        $this->browse(function (Browser $browser) {
+            $browser->visit('/')
+                ->press('REGISTER')
+                ->waitForText('Password')
+                ->type('name', 'Paul "Foo" O\'Bar')
+                ->type('email', 'foo@bar.com')
+                ->type('password', 'x')
+                ->type('password_confirmation', 'xyz')
+                ->press('button[type=submit]') // REGISTER
+                ->assertPathIs('/register')
+                ->waitForText('The password confirmation')
+                ->assertInputValue('name','Paul "Foo" O\'Bar');
         });
     }
 

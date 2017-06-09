@@ -18,7 +18,7 @@
           <v-text-field
             name="email"
             type="email"
-            v-model="email"
+            v-model="form.email"
             label="Email Address"
             prepend-icon="mail"
             :error="errors.has('email')"
@@ -44,8 +44,13 @@
 
 @section('data')
 <script>
-  var form = {
-    email: "{{ old('email') }}",
+  var app_data = {
+    form: {
+      email: "{{ old('email') }}",
+    },
+    rules: {
+      email: 'required|string|email',
+    }
   };
 </script>
 @endSection

@@ -19,7 +19,7 @@
           <v-text-field
             name="email"
             type="email"
-            v-model="email"
+            v-model="form.email"
             label="Email Address"
             prepend-icon="mail"
             :error="errors.has('email')"
@@ -31,12 +31,12 @@
           <v-text-field
             name="password"
             label="Password"
-            v-model="password"
+            v-model="form.password"
             prepend-icon="lock"
             hint="Please enter at least 6 characters"
-            :append-icon="hidden ? 'visibility' : 'visibility_off'"
+            :append-icon="form.hidden ? 'visibility' : 'visibility_off'"
             :append-icon-cb="() => (hidden = !hidden)"
-            :type="hidden ? 'password' : 'text'"
+            :type="form.hidden ? 'password' : 'text'"
             :error="errors.has('password')"
             :rules="[() => errors.get('password')]"
             required
@@ -49,11 +49,11 @@
           <v-text-field
             name="password_confirmation"
             label="Password Confirmation"
-            v-model="password2"
+            v-model="form.password2"
             prepend-icon="lock"
-            :append-icon="hidden2 ? 'visibility' : 'visibility_off'"
+            :append-icon="form.hidden2 ? 'visibility' : 'visibility_off'"
             :append-icon-cb="() => (hidden2 = !hidden2)"
-            :type="hidden2 ? 'password' : 'text'"
+            :type="form.hidden2 ? 'password' : 'text'"
             :error="errors.has('password_confirmation')"
             :rules="[() => errors.get('password_confirmation')]"
             required
@@ -76,12 +76,19 @@
 
 @section('data')
 <script>
-  var form = {
-    email: "{{ old('email') }}",
-    password: '',
-    password2: '',
-    hidden: true,
-    hidden2: true,
+  var app_data = {
+    form: {
+      email: "{{ old('email') }}",
+      password: '',
+      password2: '',
+      hidden: true,
+      hidden2: true,
+      email: "{{ old('email') }}",
+    },
+    rules: {
+      email: 'required|string|email',
+    }
   };
+
 </script>
 @endSection

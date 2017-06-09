@@ -81,29 +81,30 @@
 
 @section('data')
 <script>
-    var data = {
-        carousel: [
-          {
-            title: 'Squirrel!!!',
-            picture: '/img/carousel/squirrel.jpg',
-            text: 'Itaque tenetur nemo nobis quidem dolores provident quaerat ut veritatis, repellat quam, fugiat perferendis soluta excepturi consectetur eos cum aliquid cumque facilis.',
-          },
-          {
-            title: 'Second',
-            picture: '/img/carousel/sky.jpg',
-            text: 'Quae fugit rem, dignissimos voluptatem praesentium impedit officiis laudantium voluptatum nobis, aliquid quos temporibus, eaque. Ducimus ipsa quo, maiores sequi similique quaerat. Accusantium quia, dolores. Adipisci eligendi, nobis nisi architecto a dolorem quod animi in est quae modi sint dolores quasi doloribus aut fugiat.',
-          },
-          {
-            title: 'Third',
-            picture: '/img/carousel/bird.jpg',
-            text: 'Soluta, eaque repellendus, possimus consectetur quia ipsum voluptate, nam voluptates nostrum repellat commodi aliquid eos harum deleniti rerum! Asperiores culpa fuga, id.',
-          },
-          {
-            title: '',
-            picture: '/img/carousel/planet.jpg',
-            text: 'Aliquam rerum, voluptatum doloribus voluptatem aspernatur voluptates?',
-          },
-        ],
-    };
+  var app_data = {
+    carousel: [
+      {
+        title: 'Squirrel!!!',
+        picture: '/img/carousel/squirrel.jpg',
+        text: 'Itaque tenetur nemo nobis quidem dolores provident quaerat ut veritatis, repellat quam, fugiat perferendis soluta excepturi consectetur eos cum aliquid cumque facilis.',
+      },
+      {
+        title: 'Second',
+        picture: '/img/carousel/sky.jpg',
+        text: 'Quae fugit rem, dignissimos voluptatem praesentium impedit officiis laudantium voluptatum nobis, aliquid quos temporibus, eaque. Ducimus ipsa quo, maiores sequi similique quaerat. Accusantium quia, dolores. Adipisci eligendi, nobis nisi architecto a dolorem quod animi in est quae modi sint dolores quasi doloribus aut fugiat.',
+      },
+      {
+        title: 'Third',
+        picture: '/img/carousel/bird.jpg',
+        text: 'Soluta, eaque repellendus, possimus consectetur quia ipsum voluptate, nam voluptates nostrum repellat commodi aliquid eos harum deleniti rerum! Asperiores culpa fuga, id.',
+      },
+      {
+        title: '',
+        picture: '/img/carousel/planet.jpg',
+        text: 'Aliquam rerum, voluptatum doloribus voluptatem aspernatur voluptates?',
+      },
+    ],
+  };
 </script>
 @endSection
+
