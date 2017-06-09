@@ -23,8 +23,8 @@ Vue.component('VaLayout', require('./components/Layout.vue'));
 Vue.component('VaBtn', require('./components/LinkButton.vue'));
 
 
-var Validator = require('validatorjs');
-var FormError = require('./helpers/FormError.js');
+window.Validator = require('validatorjs');
+window.FormError = require('./helpers/FormError.js');
 
 const app = new Vue({
 
@@ -35,8 +35,22 @@ const app = new Vue({
             app_data = {};
 
         return Object.assign({
+            form: {},
             errors: new FormError(errors),
+            validator: new Validator,
         }, app_data);
     },
+
+    mounted() {
+        if ( typeof old === "undefined" || ! old )
+            return;
+
+        for (var property in old) {
+            if (old.hasOwnProperty(property)) {
+                this.form[property] = old[property]
+            }
+        }
+
+    }
 
 });

@@ -91,8 +91,8 @@
 <script>
   var app_data = {
     form: {
-      name: "{{ old('name') }}",
-      email: "{{ old('email') }}",
+      name: '',
+      email: '',
       password: '',
       password2: '',
       hidden: true,

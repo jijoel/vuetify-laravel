@@ -21,11 +21,13 @@ class ComposerServiceProvider extends ServiceProvider
     private function sendErrorsToJavascript()
     {
         \View::composer('*', function ($view) {
+            $old = app('request')->old();
             $errors = session()->get('errors')
                 ?: new ViewErrorBag;
 
             \JavaScript::put([
                 'errors' => $errors->toArray(),
+                'old' => $old,
             ]);
         });
     }

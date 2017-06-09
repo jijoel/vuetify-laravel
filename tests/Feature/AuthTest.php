@@ -107,4 +107,23 @@ class AuthTest extends TestCase
             ->assertStatus(200);
     }
 
+    /**
+     * @test
+     */
+    public function it_returns_an_error_on_bad_attempt_to_reset_password()
+    {
+        $response = $this->post('/password/reset', [
+            'email' => 'foo@bar.com',
+            'password' => 'Some Long Text',
+            'password_confirmation' => 'Some Long Text',
+            'token' => 'xxx',
+        ]);
+
+        $response->assertStatus(302)
+            ->assertSessionHasErrors('email');
+
+        // var_dump($response->getSession()->get('errors')->all()[0]);
+        // Error: We can't find a user with that e-mail address
+    }
+
 }
