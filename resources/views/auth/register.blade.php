@@ -14,6 +14,7 @@
       <v-card-row>
         <v-container fluid>
           {{ csrf_field() }}
+
           <v-text-field
             name="name"
             v-model="form.name"
@@ -21,6 +22,7 @@
             prepend-icon="person"
             :error="errors.has('name')"
             :rules="[() => errors.get('name')]"
+            hint="Please enter your name"
             required
             autofocus
             @input="errors.clear('name')"

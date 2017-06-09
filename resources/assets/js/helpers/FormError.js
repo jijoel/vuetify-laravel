@@ -18,7 +18,7 @@ class FormError {
     get(field)
     {
         if (! this.errors[field])
-            return false;
+            return true;
 
         return this.errors[field].join();
     }
