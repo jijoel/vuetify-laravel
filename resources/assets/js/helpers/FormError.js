@@ -2,10 +2,10 @@ class FormError {
 
     constructor(errors)
     {
-        if (typeof errors === 'undefined')
-            return this.errors = {};
+        if ( typeof errors === 'undefined' || ! errors )
+            errors = {};
 
-        this.errors = JSON.parse(errors);
+        this.errors = errors;
     }
 
     has(field)

@@ -11,8 +11,6 @@ window.Vue = require('vue');
 
 require('vuetify');
 
-var FormError = require('./helpers/FormError.js');
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -25,16 +23,20 @@ Vue.component('VaLayout', require('./components/Layout.vue'));
 Vue.component('VaBtn', require('./components/LinkButton.vue'));
 
 
+var Validator = require('validatorjs');
+var FormError = require('./helpers/FormError.js');
+
 const app = new Vue({
+
     el: '#app',
 
     data() {
-        if (typeof form === 'undefined')
-            form = {};
+        if ( typeof app_data === 'undefined' || ! app_data )
+            app_data = {};
 
         return Object.assign({
             errors: new FormError(errors),
-        }, form);
+        }, app_data);
     },
 
 });

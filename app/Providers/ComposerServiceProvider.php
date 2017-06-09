@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ViewErrorBag;
+
 
 class ComposerServiceProvider extends ServiceProvider
 {
@@ -13,9 +15,17 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->sendErrorsToJavascript();
+    }
+
+    private function sendErrorsToJavascript()
+    {
         \View::composer('*', function ($view) {
+            $errors = session()->get('errors')
+                ?: new ViewErrorBag;
+
             \JavaScript::put([
-                'errors' => \Session::get('errors'),
+                'errors' => $errors->toArray(),
             ]);
         });
     }
