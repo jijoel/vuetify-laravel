@@ -21,10 +21,11 @@
             v-model="form.email"
             label="Email Address"
             prepend-icon="mail"
-            :error="errors.has('email')"
-            :rules="[() => errors.get('email')]"
+            :error="check.error('email')"
+            :rules="check.text('email')"
             required
-            @input="errors.clear()"
+            @input="check.reset('email')"
+            @blur="check.refresh('email')"
           ></v-text-field>
 
         </v-container>
@@ -42,16 +43,31 @@
 @endSection
 
 
-@section('data')
+@section('js')
 <script>
-  var app_data = {
-    form: {
-      email: "{{ old('email') }}",
+  var app = new Vue({
+    el: '#app',
+
+    data: function() {
+      return {
+        form: {
+          email: old['email'],
+        },
+
+        check: new FormRules({}, {},{}),
+      };
     },
-    rules: {
-      email: 'required|string|email',
-    }
-  };
+
+    created: function() {
+      this.check = new FormRules(
+          this.form,
+          {
+            email: 'required|email',
+          },
+          errors
+        );
+    },
+
+  });
 </script>
 @endSection
-

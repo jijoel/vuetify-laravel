@@ -8,6 +8,7 @@
 /public/build/*
 /public/hot
 /public/storage
+/public/mix-manifest.json
 
 # Development files
 Homestead.json
@@ -16,7 +17,7 @@ npm-debug.log
 /.idea
 /.vagrant
 .env
-.env.dusk
+.env.dusk.local
 .DS_Store
 
 # Other
