@@ -22,10 +22,11 @@
             v-model="form.email"
             label="Email Address"
             prepend-icon="mail"
-            :error="errors.has('email')"
-            :rules="[() => errors.get('email')]"
+            :error="check.error('email')"
+            :rules="check.text('email')"
             required
-            @input="errors.clear()"
+            @input="check.reset('email')"
+            @blur="check.refresh('email')"
           ></v-text-field>
 
           <v-text-field
@@ -33,12 +34,15 @@
             label="Password"
             v-model="form.password"
             prepend-icon="lock"
+            hint="Please enter at least 6 characters"
             :append-icon="form.hidden ? 'visibility' : 'visibility_off'"
-            :append-icon-cb="() => (hidden = !hidden)"
+            :append-icon-cb="() => (form.hidden = !form.hidden)"
             :type="form.hidden ? 'password' : 'text'"
-            :error="errors.has('password')"
+            :error="check.error('password')"
+            :rules="check.text('password')"
             required
-            @input="errors.clear()"
+            @input="check.reset('password')"
+            @blur="check.refresh('password')"
           ></v-text-field>
 
           <v-checkbox
@@ -66,18 +70,36 @@
 @endsection
 
 
-@section('data')
+@section('js')
 <script>
-  var app_data = {
-    form: {
-      email: '{{ old("email") }}',
-      password: '',
-      remember: false,
-      hidden: true,
+  var app = new Vue({
+    el: '#app',
+
+    data: function() {
+      return {
+        form: {
+          email: old['email'],
+          password: '',
+          remember: false,
+          hidden: true,
+        },
+
+        check: new FormRules({}, {},{}),
+      };
     },
-    rules: {
-      email: 'required|email',
+
+    created: function() {
+      this.check = new FormRules(
+          this.form,
+          {
+            email: 'required|email',
+            password: 'required|string',
+          },
+          errors
+        );
     },
-  };
+
+  });
 </script>
 @endSection
+

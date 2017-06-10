@@ -26,6 +26,6 @@
     <!-- Scripts -->
     @yield('data')
     <script src="{{ mix('js/app.js') }}"></script>
-    @yield('js')
+    @yield('js', view('layouts._vue-app-js'))
 </body>
 </html>

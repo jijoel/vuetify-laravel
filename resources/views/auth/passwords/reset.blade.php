@@ -22,10 +22,11 @@
             v-model="form.email"
             label="Email Address"
             prepend-icon="mail"
-            :error="errors.has('email')"
-            :rules="[() => errors.get('email')]"
+            :error="check.error('email')"
+            :rules="check.text('email')"
             required
-            @input="errors.clear()"
+            @input="check.reset('email')"
+            @blur="check.refresh('email')"
           ></v-text-field>
 
           <v-text-field
@@ -35,29 +36,30 @@
             prepend-icon="lock"
             hint="Please enter at least 6 characters"
             :append-icon="form.hidden ? 'visibility' : 'visibility_off'"
-            :append-icon-cb="() => (hidden = !hidden)"
+            :append-icon-cb="() => (form.hidden = !form.hidden)"
             :type="form.hidden ? 'password' : 'text'"
-            :error="errors.has('password')"
-            :rules="[() => errors.get('password')]"
+            :error="check.error('password')"
+            :rules="check.text('password')"
             required
             counter
             min="6"
             max="60"
-            @input="errors.clear('password')"
+            @input="check.reset('password')"
+            @blur="check.refresh('password')"
           ></v-text-field>
 
           <v-text-field
             name="password_confirmation"
             label="Password Confirmation"
-            v-model="form.password2"
+            v-model="form.password_confirmation"
             prepend-icon="lock"
             :append-icon="form.hidden2 ? 'visibility' : 'visibility_off'"
-            :append-icon-cb="() => (hidden2 = !hidden2)"
+            :append-icon-cb="() => (form.hidden2 = !form.hidden2)"
             :type="form.hidden2 ? 'password' : 'text'"
-            :error="errors.has('password_confirmation')"
-            :rules="[() => errors.get('password_confirmation')]"
+            :error="check.error('password')"
+            :rules="check.text('password')"
             required
-            @input="errors.clear('password_confirmation')"
+            @input="check.refresh('password')"
           ></v-text-field>
 
       </v-container>
@@ -74,21 +76,37 @@
 @endSection
 
 
-@section('data')
+@section('js')
 <script>
-  var app_data = {
-    form: {
-      email: "{{ old('email') }}",
-      password: '',
-      password2: '',
-      hidden: true,
-      hidden2: true,
-      email: "{{ old('email') }}",
-    },
-    rules: {
-      email: 'required|string|email',
-    }
-  };
+  var app = new Vue({
+    el: '#app',
 
+    data: function() {
+      return {
+        form: {
+          name: old['name'],
+          email: old['email'],
+          password: '',
+          password2: '',
+          hidden: true,
+          hidden2: true,
+        },
+
+        check: new FormRules({}, {},{}),
+      };
+    },
+
+    created: function() {
+      this.check = new FormRules(
+          this.form,
+          {
+            email: 'required|email',
+            password: 'required|string|min:6|confirmed',
+          },
+          errors
+        );
+    },
+
+  });
 </script>
 @endSection
