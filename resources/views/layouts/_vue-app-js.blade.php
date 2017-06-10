@@ -9,12 +9,12 @@ const app = new Vue({
 
         return Object.assign({
             form: {},
-            errors: new FormError(errors),
+            // errors: new FormError(errors),
             validator: new Validator,
         }, app_data);
     },
 
-    mounted() {
+    created() {
         if ( typeof old === "undefined" || ! old )
             return;
 
