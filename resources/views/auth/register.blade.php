@@ -42,24 +42,37 @@
             @blur="check.refresh('email')"
           ></v-text-field>
 
-          <v-text-field
-            name="password"
-            label="Password"
-            v-model="form.password"
-            prepend-icon="lock"
-            hint="Please enter at least 6 characters"
-            :append-icon="form.hidden ? 'visibility' : 'visibility_off'"
-            :append-icon-cb="() => (form.hidden = !form.hidden)"
-            :type="form.hidden ? 'password' : 'text'"
-            :error="check.error('password')"
-            :rules="check.text('password')"
-            required
-            counter
-            min="6"
-            max="60"
-            @input="check.reset('password')"
-            @blur="check.refresh('password')"
-          ></v-text-field>
+          <v-layout row>
+            <v-flex xs10 sm11>
+              <v-text-field
+                name="password"
+                label="Password"
+                v-model="form.password"
+                prepend-icon="lock"
+                :hint="pwHint"
+                :append-icon="form.hidden ? 'visibility' : 'visibility_off'"
+                :append-icon-cb="() => (form.hidden = !form.hidden)"
+                :type="form.hidden ? 'password' : 'text'"
+                :error="check.error('password')"
+                :rules="check.text('password')"
+                required
+                counter
+                min="6"
+                max="60"
+                @input="onPasswordInput"
+                @blur="check.refresh('password')"
+              ></v-text-field>
+            </v-flex>
+
+            <v-flex xs2 sm1>
+              <v-progress-circular
+                :width="16"
+                :value="indicatorValue"
+                :class="indicatorColor"
+              ></v-progress-circular>
+
+            </v-flex>
+          </v-layout>
 
           <v-text-field
             name="password_confirmation"
@@ -104,6 +117,7 @@
           hidden: true,
           hidden2: true,
         },
+        pwMeter: {},
 
         check: new FormRules({}, {},{}),
       };
@@ -121,7 +135,58 @@
         );
     },
 
+    computed: {
+      hasFeedback() {
+        return this.pwMeter
+          && this.pwMeter.feedback
+          && this.form.password
+      },
+      pwHint() {
+        if ( ! this.hasFeedback )
+          return 'Please enter your password';
+
+        var f = this.pwMeter.feedback
+
+        return (f.warning ? f.warning + ' ' : '')
+          + f.suggestions.join(' ');
+      },
+      indicatorValue() {
+        if ( ! this.hasFeedback )
+          return 0;
+
+        return (this.pwMeter.guesses_log10 * 10);
+      },
+      indicatorColor() {
+        if ( ! this.hasFeedback )
+          return 'blue-grey--text';
+
+        if (this.pwMeter.guesses_log10 >= 8)
+          return 'green--text';
+        if (this.pwMeter.guesses_log10 >= 6)
+          return 'orange--text';
+        if (this.pwMeter.guesses_log10 >= 4)
+          return 'yellow--text';
+        if (this.pwMeter.guesses_log10 >= 0)
+          return 'red--text';
+
+        return 'blue-grey--text';
+      },
+    },
+
+    methods: {
+      onPasswordInput() {
+        this.check.reset('password');
+
+        if (typeof zxcvbn !== 'function')
+          return;
+
+        this.pwMeter = zxcvbn(this.form.password);
+      }
+    }
+
+
   });
 </script>
+<script type="text/javascript" src="/js/zxcvbn.js"></script>
 @endSection
 

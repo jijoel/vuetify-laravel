@@ -20,5 +20,8 @@
     "validatorjs": "^3.13.3",
     "vue": "^2.1.10",
     "vuetify": "^0.12.7"
+  },
+  "dependencies": {
+    "zxcvbn": "^4.4.2"
   }
 }
