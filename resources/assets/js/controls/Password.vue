@@ -1,6 +1,6 @@
 <template>
   <v-text-field
-    :value="password"
+    :value="value"
     :name="name"
     :label="label"
     :type="getType"
@@ -57,7 +57,6 @@ export default {
 
   data() {
     return {
-      password: '',
       hidden: true,
     }
   },
@@ -73,7 +72,7 @@ export default {
 
   methods: {
     updateValue: function (value) {
-      this.password = value;
+      this.value = value;
       this.$emit('input', value);
     },
   }
