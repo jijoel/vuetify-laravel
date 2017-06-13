@@ -8,6 +8,7 @@
     :append-icon="getIcon"
     :append-icon-cb="() => (hidden = !hidden)"
 
+    :hint="hint"
     :error="error"
     :errors="errors"
     :rules="rules"
@@ -15,7 +16,7 @@
     :counter="counter"
     :min="min"
     :max="max"
-    :v-on:blur="blur"
+    @blur="blur($event)"
     @input="updateValue($event)">
   ></v-text-field>
 
@@ -37,7 +38,6 @@ export default {
     'min': {},
     'max': {},
     'input': {},
-    'blur': {},
     'hint': {},
     'value': {},
 
@@ -71,7 +71,10 @@ export default {
   },
 
   methods: {
-    updateValue: function (value) {
+    blur(value) {
+      this.$emit('blur', value);
+    },
+    updateValue(value) {
       this.value = value;
       this.$emit('input', value);
     },
