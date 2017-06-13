@@ -16,33 +16,24 @@
 
           {{ csrf_field() }}
 
-          <v-text-field
+          <va-email-control
+            required
             name="email"
-            type="email"
             v-model="form.email"
-            label="Email Address"
-            prepend-icon="mail"
             :error="check.error('email')"
             :rules="check.text('email')"
-            required
             @input="check.reset('email')"
             @blur="check.refresh('email')"
-          ></v-text-field>
+          >
+          </va-email-control>
 
-          <v-text-field
+          <va-password-control
+            required
             name="password"
-            label="Password"
             v-model="form.password"
-            prepend-icon="lock"
-            hint="Please enter at least 6 characters"
-            :append-icon="form.hidden ? 'visibility' : 'visibility_off'"
-            :append-icon-cb="() => (form.hidden = !form.hidden)"
-            :type="form.hidden ? 'password' : 'text'"
             :error="check.error('password')"
             :rules="check.text('password')"
-            required
-            @input="check.reset('password')"
-            @blur="check.refresh('password')"
+            @input="check.refresh('password')"
           ></v-text-field>
 
           <v-checkbox

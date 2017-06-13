@@ -16,49 +16,35 @@
         {{ csrf_field() }}
         <input type="hidden" name="token" value="{{ $token }}">
 
-          <v-text-field
+          <va-email-control
+            required
             name="email"
-            type="email"
             v-model="form.email"
-            label="Email Address"
-            prepend-icon="mail"
             :error="check.error('email')"
             :rules="check.text('email')"
-            required
             @input="check.reset('email')"
             @blur="check.refresh('email')"
-          ></v-text-field>
+          >
+          </va-email-control>
 
-          <v-text-field
+          <va-new-password-control
+            required
             name="password"
-            label="Password"
             v-model="form.password"
-            prepend-icon="lock"
-            hint="Please enter at least 6 characters"
-            :append-icon="form.hidden ? 'visibility' : 'visibility_off'"
-            :append-icon-cb="() => (form.hidden = !form.hidden)"
-            :type="form.hidden ? 'password' : 'text'"
             :error="check.error('password')"
             :rules="check.text('password')"
-            required
-            counter
-            min="6"
-            max="60"
             @input="check.reset('password')"
             @blur="check.refresh('password')"
-          ></v-text-field>
+          >
+          </va-new-password-control>
 
-          <v-text-field
+          <va-password-control
+            required
             name="password_confirmation"
             label="Password Confirmation"
-            v-model="form.password_confirmation"
-            prepend-icon="lock"
-            :append-icon="form.hidden2 ? 'visibility' : 'visibility_off'"
-            :append-icon-cb="() => (form.hidden2 = !form.hidden2)"
-            :type="form.hidden2 ? 'password' : 'text'"
+            v-model="form.password2"
             :error="check.error('password')"
             :rules="check.text('password')"
-            required
             @input="check.refresh('password')"
           ></v-text-field>
 
@@ -101,7 +87,7 @@
           this.form,
           {
             email: 'required|email',
-            password: 'required|string|min:6|confirmed',
+            password: 'required|string|min:8|confirmed',
           },
           errors
         );
