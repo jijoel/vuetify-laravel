@@ -35,7 +35,7 @@ module.exports = class FormRules
     text(field)
     {
         if (this.errors[field])
-            return [ this.errors[field].join() ];
+            return [ this.errors[field].join(' ') ];
 
         return [ true ];
     }
