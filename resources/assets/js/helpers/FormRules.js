@@ -35,7 +35,7 @@ module.exports = class FormRules
     text(field)
     {
         if (this.errors[field])
-            return [ this.errors[field].join() ];
+            return [ this.errors[field].join(' ') ];
 
         return [ true ];
     }
@@ -45,7 +45,7 @@ module.exports = class FormRules
         var v = new Validator(this.data, this.rules);
 
         if (v.passes())
-            return;
+            return this.reset(field);
 
         this.errors[field] = v.errors.get(field);
     }

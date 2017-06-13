@@ -15,18 +15,16 @@
         <v-container fluid>
           {{ csrf_field() }}
 
-          <v-text-field
+          <va-email-control
+            required
             name="email"
-            type="email"
             v-model="form.email"
-            label="Email Address"
-            prepend-icon="mail"
             :error="check.error('email')"
             :rules="check.text('email')"
-            required
             @input="check.reset('email')"
             @blur="check.refresh('email')"
-          ></v-text-field>
+          >
+          </va-email-control>
 
         </v-container>
       </v-card-row>

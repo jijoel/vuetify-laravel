@@ -21,6 +21,9 @@ Vue.component('example', require('./components/Example.vue'));
 
 Vue.component('VaLayout', require('./components/Layout.vue'));
 Vue.component('VaBtn', require('./components/LinkButton.vue'));
+Vue.component('VaEmailControl', require('./controls/Email.vue'));
+Vue.component('VaPasswordControl', require('./controls/Password.vue'));
+Vue.component('VaNewPasswordControl', require('./controls/NewPassword.vue'));
 
 
 window.Validator = require('validatorjs');
