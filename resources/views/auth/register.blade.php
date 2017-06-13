@@ -16,15 +16,15 @@
           {{ csrf_field() }}
 
           <v-text-field
-            name="name"
-            v-model="form.name"
-            label="Name"
-            prepend-icon="person"
-            :error="check.error('name')"
-            :rules="check.text('name')"
-            hint="Please enter your name"
             required
             autofocus
+            name="name"
+            label="Name"
+            v-model="form.name"
+            prepend-icon="person"
+            hint="Please enter your name"
+            :error="check.error('name')"
+            :rules="check.text('name')"
             @input="check.reset('name')"
             @blur="check.refresh('name')"
           ></v-text-field>
@@ -41,23 +41,24 @@
           </va-email-control>
 
           <va-new-password-control
+            required
+            name="password"
             v-model="form.password"
             :error="check.error('password')"
             :rules="check.text('password')"
             @input="check.reset('password')"
             @blur="check.refresh('password')"
-            required
           >
           </va-new-password-control>
 
           <va-password-control
+            required
             name="password_confirmation"
             label="Password Confirmation"
             v-model="form.password_confirmation"
             :error="check.error('password')"
             :rules="check.text('password')"
             @input="check.refresh('password')"
-            required
           ></v-text-field>
 
         </v-container>
@@ -85,12 +86,8 @@
           name: old['name'],
           email: old['email'],
           password: '',
-          password2: '',
-          hidden: true,
-          hidden2: true,
+          password_confirmation: '',
         },
-        pwMeter: {},
-
         check: new FormRules({}, {},{}),
       };
     },

@@ -45,7 +45,7 @@ module.exports = class FormRules
         var v = new Validator(this.data, this.rules);
 
         if (v.passes())
-            return;
+            return this.reset(field);
 
         this.errors[field] = v.errors.get(field);
     }
